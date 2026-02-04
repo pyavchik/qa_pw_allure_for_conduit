@@ -8,7 +8,10 @@ test.beforeEach(async ({ page, user, settingsPage }) => {
   await settingsPage.open();
 });
 
-test('Add profile picture URL from settings', async ({ page, settingsPage }) => {
+test('Add profile picture URL from settings', async ({
+  page,
+  settingsPage,
+}) => {
   const imageUrl = faker.image.avatar();
 
   await settingsPage.fillImageUrlField(imageUrl);
