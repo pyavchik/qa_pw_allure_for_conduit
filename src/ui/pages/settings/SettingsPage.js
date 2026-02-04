@@ -65,4 +65,16 @@ export class SettingsPage {
       await expect(this.updateSettingsButton).toBeVisible();
     });
   }
+
+  async getUsernameFieldValue() {
+    return this.usernameField.inputValue();
+  }
+
+  async getImageUrlFieldValue() {
+    return this.imageUrlField.inputValue();
+  }
+
+  async getBioFieldValue() {
+    return this.bioField.inputValue();
+  }
 }
