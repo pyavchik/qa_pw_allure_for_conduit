@@ -1,4 +1,6 @@
 import { test as base } from '@playwright/test';
+import { rm } from 'fs/promises';
+import { join } from 'path';
 import { Logger } from '../../src/common/logger/Logger';
 import { generateNewUserData } from '../../src/common/testData/generateNewUserData';
 import * as allure from 'allure-js-commons';
@@ -13,9 +15,11 @@ export const test = base.extend<
     users;
     infoTestLog;
     addAllureTestHierarchy;
+    clearAllureResults;
   },
   {
     logger;
+    clearAllureResults;
   }
 >({
   usersNumber: [1, { option: true }],
@@ -83,5 +87,17 @@ export const test = base.extend<
       await use('addAllureTestHierarhy');
     },
     { scope: 'test', auto: true },
+  ],
+  clearAllureResults: [
+    async ({}, use) => {
+      const resultsDir = join(process.cwd(), 'allure-results');
+      try {
+        await rm(resultsDir, { recursive: true });
+      } catch {
+        // Folder may not exist yet
+      }
+      await use('clearAllureResults');
+    },
+    { scope: 'worker', auto: true },
   ],
 });
