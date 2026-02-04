@@ -1,5 +1,5 @@
 import { test } from '../../_fixtures/fixtures';
-import { expect } from '../../../src/common/helpers/pw';
+import { expect } from '@playwright/test';
 import { signUpUser } from '../../../src/ui/actions/auth/signUpUser';
 
 test.beforeEach(async ({ page, user }) => {

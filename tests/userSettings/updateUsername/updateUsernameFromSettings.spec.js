@@ -7,7 +7,7 @@ test.beforeEach(async ({ page, user, settingsPage }) => {
   await settingsPage.open();
 });
 
-test('Update username from settings', async ({ user, settingsPage }) => {
+test('Update username from settings', async ({ settingsPage }) => {
   const newUsername = `${faker.person.firstName()}_${faker.person.lastName()}`
     .replaceAll("'")
     .toLowerCase();
