@@ -24,5 +24,5 @@ test('Update username from settings', async ({ page, settingsPage }) => {
   ]);
 
   await page.reload();
-  await expect(settingsPage.usernameField).toHaveValue(newUsername);
+  await expect(page.getByRole('link', { name: newUsername })).toBeVisible();
 });

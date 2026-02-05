@@ -10,6 +10,7 @@ test.beforeEach(async ({ page, user, settingsPage }) => {
 
 test('Add profile picture URL from settings', async ({
   page,
+  user,
   settingsPage,
 }) => {
   const imageUrl = faker.image.avatar();
@@ -24,6 +25,7 @@ test('Add profile picture URL from settings', async ({
     settingsPage.clickUpdateSettingsButton(),
   ]);
 
-  await page.reload();
-  await expect(settingsPage.imageUrlField).toHaveValue(imageUrl);
+  await page.goto(`/profile/${user.username}`);
+  await expect(page.getByRole('img', { name: "User's profile image" }))
+    .toHaveAttribute('src', imageUrl);
 });
