@@ -19,6 +19,8 @@ test('Update password from settings', async ({
   await settingsPage.fillPasswordField(newPassword);
   await settingsPage.clickUpdateSettingsButton();
 
+  // This Conduit deployment has no visible "Sign out" control; simulate logout.
+  // Use settingsPage.clickSignOutLink(user.username) when the app provides one.
   await page.evaluate(() => {
     /* eslint-disable no-undef -- runs in browser context */
     window.localStorage.clear();

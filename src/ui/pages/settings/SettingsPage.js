@@ -12,6 +12,9 @@ export class SettingsPage {
     this.updateSettingsButton = page.getByRole('button', {
       name: 'Update Settings',
     });
+    this.signOutLink = page.getByRole('link', { name: /sign out|log out/i });
+    this.userMenuLink = (username) =>
+      page.getByRole('link', { name: username }).first();
   }
 
   async step(title, stepToRun) {
@@ -76,5 +79,14 @@ export class SettingsPage {
 
   async getBioFieldValue() {
     return this.bioField.inputValue();
+  }
+
+  async clickSignOutLink(username) {
+    await this.step(`Click the 'Sign out' link`, async () => {
+      if (username) {
+        await this.userMenuLink(username).click();
+      }
+      await this.signOutLink.click();
+    });
   }
 }
